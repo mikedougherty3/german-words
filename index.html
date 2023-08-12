@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      background: linear-gradient(90deg, #000 0%, #000 33%, #F00, 33%, #F00 66%, #FF0 66%, #FF0 100%);
+      /* background-image: linear-gradient(to right, black, red, yellow); */
+    }
+
+    /* button {
+      font-size: 3em;
+    } */
+
+    input {
+      font-size: 50px;
+    }
+
+    label {
+      font-size: 50px;
+    }
+
+    input[type=radio] {
+      width: 30px;
+      height: 30px;
+    }
+
+    .button-big {
+      font-size: 3em;
+      padding: 1em;
+      margin: 10px;
+      border-radius: 10px;
+    }
+
+    .button-med {
+      font-size: 3em;
+      padding: 2em;
+      margin: 10px;
+      border-radius: 10px;
+    }
+
+    .word-button {
+      font-size: 1.25em;
+      padding: 1em;
+      margin: 10px;
+      border-radius: 5px;
+    }
+
+    .active-button {
+      background-color: darkgrey;
+    }
+
+    .button-green {
+      background-color: limegreen;
+    }
+
+    .button-blue {
+      background-color: deepskyblue;
+    }
+
+    .hide {
+      display: none !important;
+    }
+
+    .display-flex {
+      display: flex;
+    }
+
+    .even-space {
+      justify-content: space-evenly;
+    }
+
+    .column {
+      flex-direction: column;
+    }
+
+    .py {
+      padding-top: 3em;
+      padding-bottom: 1em;
+    }
+
+    .heading {
+      text-align: right;
+      font-size: 5em;
+    }
+
+    .section-heading {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    .section-header {
+      font-size: 7em;
+    }
+
+    .section-button {
+      font-size: 2em;
+      padding: 1em;
+      margin: 10px;
+      border-radius: 10px;
+    }
+
+    .section-seperator {
+      width: 100%;
+      height: 3px;
+      background-color: black;
+    }
+
+    .form-div {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      width: 25%;
+      font-size: 3em;
+    }
+
+    .w-25 {
+      width: 25%;
+    }
+
+    .small-text {
+      font-size: 30px;
+    }
+
+    .front-card {
+      font-size: 10em;
+      display: flex;
+      justify-content: center;
+      border: solid 1px black;
+      border-radius: 10px;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      background-color: #fff;
+      word-break: break-word;
+    }
+
+    .front-card-error {
+      font-size: 5em;
+      display: flex;
+      justify-content: center;
+      border: solid 1px black;
+      border-radius: 10px;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      background-color: #fff;
+      word-break: break-word;
+    }
+
+    .back-card {
+      font-size: 3em;
+      display: flex;
+      justify-content: center;
+      border: solid 1px black;
+      border-radius: 10px;
+      background-color: #fff;
+      word-break: break-word;
+    }
+
+    /***********************
+    **        Table       **
+    ***********************/
+    table {
+      /* font-family: arial, sans-serif; */
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th {
+      background-color: #222;
+      color: #fff;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    /***********************
+    **        Tabs       **
+    ***********************/
+    .tab {
+      display: flex;
+      flex-wrap: wrap;
+      overflow: hidden;
+      /* border: 1px solid #ccc;
+      background-color: #f1f1f1; */
+      padding-top: 20px;
+      padding-left: 20px;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      /*background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      transition: 0.3s;*/
+      cursor: pointer;
+      padding: 14px 16px;
+      font-size: 3em;
+      height: 250px;
+      width: 250px;
+      border-radius: 10px;
+      margin: 20px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="heading">German Words</div>
+
+  <div class="tab" id="tab">
+    <button class="homebutton" onclick="openTab(event, 'all')">All</button>
+    <button class="homebutton" onclick="openTab(event, 'favs')">Favs</button>
+    <button class="homebutton" onclick="openTab(event, 'words')">Word Lists</button>
+    <button class="homebutton" onclick="openTab(event, 'load')">Import Data</button>
+    <button class="homebutton" onclick="openTab(event, 'settings')">Settings</button>
+    <button class="homebutton" onclick="openTab(event, 'addword')">Add Word</button>
+  </div>
+
+  <div id="all" class="tabcontent column display-flex hide">
+    <div class="section-heading">
+      <div class="section-header">All Words</div>
+      <button class="section-button" onclick="goHome()">Home</button>
+    </div>
+    <hr class="section-seperator"/>
+    <div id="button-row" class="py display-flex column"></div>
+    <div id="card-area" class="py display-flex column hide"></div>
+    <div id="feedback" class="py display-flex column hide">
+      <button class="button-med" onclick="giveFeedback('right')">Got it right</button>
+      <button class="button-med" onclick="giveFeedback('wrong')">Got it wrong</button>
+      <button id="dontshow" class="button-med" onclick="giveFeedback('dont')">Dont Show This Word Again</button>
+      <button id="replaceall" class="button-med" onclick="giveFeedback('newgroup')">Replace all words in the group</button>
+    </div>
+    <div id="hidden-area" class="hide">
+      <div id="current-part-of-speech"></div>
+      <div id="current-word"></div>
+    </div>
+  </div>
+
+  <div id="favs" class="tabcontent column display-flex hide">
+    <div class="section-heading">
+      <div class="section-header">Favorites</div>
+      <button class="section-button" onclick="goHome()">Home</button>
+    </div>
+    <hr class="section-seperator"/>
+    <div id="button-row-fav" class="py display-flex column"></div>
+    <div id="card-area-fav" class="py display-flex column hide"></div>
+    <div id="feedback-fav" class="py display-flex column hide">
+      <button class="button-med" onclick="giveFeedbackFav('right')">Got it right</button>
+      <button class="button-med" onclick="giveFeedbackFav('wrong')">Got it wrong</button>
+      <button id="removefav" class="button-med" onclick="giveFeedbackFav('remove')">Remove Word From Favs</button>
+    </div>
+    <div id="hidden-area-fav" class="hide">
+      <div id="current-fav-part-of-speech"></div>
+      <div id="current-fav-word"></div>
+    </div>
+  </div>
+
+  <div id="words" class="tabcontent column hide">
+    <div class="section-heading">
+      <div class="section-header">Word Lists</div>
+      <button class="section-button" onclick="goHome()">Home</button>
+    </div>
+    <hr class="section-seperator"/>
+    <div id="words-content">
+    </div>
+  </div>
+
+  <div id="load" class="tabcontent column hide">
+    <div class="section-heading">
+      <div class="section-header">Data</div>
+      <button class="section-button" onclick="goHome()">Home</button>
+    </div>
+    <hr class="section-seperator"/>
+    <div class="py">
+      <input type="file" id="file-input" />
+    </div>
+    <div class="py">
+      <button onclick="load()">Load This Data</button>
+      <button onclick="clearData()">Clear All Data</button>
+    </div>
+    <h3>Contents of the file:</h3>
+    <div id="file-content"></div>
+    <div id="hidden-file-content" class="hide"></div>
+  </div>
+
+  <div id="settings" class="tabcontent column hide">
+    <div class="section-heading">
+      <div class="section-header">Settings</div>
+      <button class="section-button" onclick="goHome()">Home</button>
+    </div>
+    <hr class="section-seperator"/>
+    <div class="py">
+      <input type="radio" id="groupAll" name="learningtype" value="all" onchange="switchLearning()">
+      <label for="all">Use all words on All tab</label>
+    </div>
+    <div class="py">
+      <input type="radio" id="groupSmall" name="learningtype" value="groupSmall" onchange="switchLearning()">
+      <label for="groupSmall">Use a group of 10 words on All tab</label>
+    </div>
+    <div class="py">
+      <input type="radio" id="groupBig" name="learningtype" value="groupBig" onchange="switchLearning()">
+      <label for="groupBig">Use a group of 20 words on Allg tab</label>
+    </div>
+    <hr style="width: 100%;">
+    <div>
+      <button class="button-big" onclick="exportData()">Export Data</button>
+      <button class="button-big" onclick="document.getElementById('settings-input').click()">Import Data</button>
+      <input type='file' id="settings-input" style="display:none">
+    </div>
+  </div>
+
+  <div id="addword" class="tabcontent column hide">
+    <div class="section-heading">
+      <div class="section-header">Add Word</div>
+      <button class="section-button" onclick="goHome()">Home</button>
+    </div>
+    <hr class="section-seperator"/>
+    <div id="add-content">
+    </div>
+  </div>
+</body>
+
+<script>
+  window.onload = function (event) {
+    document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+    document.getElementById('settings-input').addEventListener('change', importSettings, false);
+    populateWords();
+    populateLearn();
+    populateFavorite();
+    populateSettings();
+    populateAddWords();
+    if (localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'seengroupWords') == null) {
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + 'seengroupWords', JSON.stringify({}));
+    }
+  }
+
+  const APP_LOCAL_STORAGE_PREFIX = 'germanWords.';
+
+  
+
+
+  /*********************************************************************
+   *                                                                   *
+   *      This section if for loading of the data for the app
+   * 
+   *      The file needs to be a csv with # as the seperator
+   *      and columns of German, Part of Speech, English followed
+   *      by any other interesting things for the part of speech.
+   * 
+   *      Each Part Of Speech needs to be loaded individually.
+   *      This is something I can change in the future.
+   *                                                                   *  
+   ********************************************************************/
+   
+   function readSingleFile(e) {
+    var file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var contents = e.target.result;
+      displayTableContents(contents);
+    };
+    reader.readAsText(file);
+  }
+
+  function load() {
+    console.log('you wanna load?');
+
+    var hiddenContentDiv = document.getElementById('hidden-file-content');
+    var content = hiddenContentDiv.innerHTML;
+
+    var lines = content.split('\r\n');
+    var header = lines[0];
+    var headerVals = header.split('#');
+
+    if (!lines[1]) {
+      alert("I could not find data to import. Are you sure you selected a file?");
+      return;
+    }
+
+    // Get the part of speech for this file
+    var partOfSpeech = lines[1].split('#')[1];
+
+    var currentList = [];
+    try {
+      currentList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech)) || [];
+    } catch (e) {
+      console.log('havent seen that one before');
+    }
+
+    for (var i = 1; i < lines.length; i++) {
+      if (!lines[i]) {
+        continue;
+      }
+      
+      var lineSplit = lines[i].split('#');
+      
+      var found = currentList.some(function (element) {
+        return element[headerVals[0]] == lineSplit[0];
+      });
+
+      if (found) {
+        continue;
+      }
+
+      var wordObject = {}
+      for (var j = 0; j < headerVals.length; j++) {
+        if (headerVals[j] == 'Part Of Speech') {
+          continue;
+        }
+        wordObject[headerVals[j]] = lineSplit[j]
+      }
+      currentList.push(wordObject);
+    }
+
+    localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech, JSON.stringify(currentList));
+    
+    populateWords();
+    populateLearn();
+    populateFavorite();
+    
+    alert(`Loaded ${partOfSpeech} successfully!`);
+    deleteElementContents('hidden-file-content');
+    deleteElementContents('file-content');
+    document.getElementById('file-input').value = null
+    
+    console.log('done loading');
+  }
+
+  function displayTableContents(contents) {
+    deleteElementContents('file-content');
+    deleteElementContents('hidden-file-content');
+
+    document.getElementById('hidden-file-content').textContent = contents;
+
+    var fileContentDiv = document.getElementById('file-content');
+    var table = document.createElement("table");
+    var lines = contents.split('\n');
+    
+    var header = lines[0];
+    var headerVals = header.split('#');
+    var tableRow = document.createElement("tr");
+    headerVals.forEach(element => {
+      var tableHeader = document.createElement("th");
+      tableHeader.innerHTML = element;
+      tableRow.appendChild(tableHeader);
+    });
+    table.appendChild(tableRow);
+    
+    for (var i = 1; i < lines.length; i++) {
+      if (!lines[i]) {
+        continue;
+      }
+      var tableRow = document.createElement("tr");
+      var lineSplit = lines[i].split('#');
+      lineSplit.forEach(element => {
+        var tableData = document.createElement("td");
+        tableData.innerHTML = element;
+        tableRow.appendChild(tableData);
+      });
+      table.appendChild(tableRow);
+    }
+
+    fileContentDiv.appendChild(table);
+  }
+
+  function deleteElementContents(elemId) {
+    var element = document.getElementById(elemId);
+
+    while (element.firstChild) {
+      element.removeChild(element.lastChild);
+    }
+  }
+
+
+  function clearData() {
+    var areYouSure = confirmChoice('delete all of your data saved in the browser');
+    if (!areYouSure) {
+      return;
+    }
+
+    var partsOfSpeech = getPartsOfSpeechFromLocalStorage();
+
+    partsOfSpeech.forEach((partOfSpeech) => {
+      localStorage.removeItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech);
+      localStorage.removeItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + 'group');
+      localStorage.removeItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + 'Fav');
+    });
+    localStorage.removeItem(APP_LOCAL_STORAGE_PREFIX + 'seengroupWords');
+    localStorage.removeItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype');
+    localStorage.removeItem(APP_LOCAL_STORAGE_PREFIX + 'wordgroupNumber');
+  }
+
+
+
+  /*********************************************************************
+   *                                                                   *
+   *      This section if for showing all the words in the app
+   *                                                                   *  
+   ********************************************************************/
+
+  function populateWords() {
+    var partsOfSpeech = getPartsOfSpeechFromLocalStorage();
+
+    deleteElementContents('words-content');
+
+    var wordDiv = document.getElementById('words-content');
+    var buttonRow = document.createElement("div");
+    buttonRow.className = "py";
+    wordDiv.appendChild(buttonRow);
+    partsOfSpeech.forEach(function(partOfSpeech) {
+      var button = document.createElement("button");
+      button.setAttribute("onclick", `showWords("${partOfSpeech}")`);
+      button.innerHTML = partOfSpeech;
+      button.className = "word-button word-button-selector";
+      buttonRow.appendChild(button);
+    });
+    var wordArea = document.createElement("div");
+    wordArea.setAttribute('id', 'wordarea');
+    wordArea.className = "hide";
+    wordDiv.appendChild(wordArea);
+  }
+
+  function showWords(partOfSpeech) {
+    var wordButtons = document.getElementsByClassName('word-button-selector');
+    for (var i = 0; i < wordButtons.length; i++) {
+      if (wordButtons[i].innerHTML == partOfSpeech) {
+        if (!wordButtons[i].classList.contains('active-button')) {
+          wordButtons[i].classList.add('active-button');
+        }
+      } else {
+        wordButtons[i].classList.remove('active-button');
+      }
+    }
+
+    deleteElementContents('wordarea');
+    var currentList = [];
+    var favList = [];
+    try {
+      currentList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech));
+      favList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav"));
+    } catch (e) {
+      console.log('havent seen that one before');
+    }
+
+    var wordArea = document.getElementById("wordarea");
+
+    var table = document.createElement("table");
+    var headerVals = Object.keys(currentList[0]);
+    var tableRow = document.createElement("tr");
+    headerVals.forEach(element => {
+      var tableHeader = document.createElement("th");
+      tableHeader.innerHTML = element;
+      tableRow.appendChild(tableHeader);
+    });
+    var favHeader = document.createElement("th");
+    favHeader.innerHTML = "Favorite";
+    tableRow.appendChild(favHeader);
+    table.appendChild(tableRow);
+    
+    currentList.forEach(function(wordObject) {
+      var tableRow = document.createElement("tr");
+      headerVals.forEach(headerKey => {
+        var tableData = document.createElement("td");
+        tableData.innerHTML = wordObject[headerKey];
+        tableRow.appendChild(tableData);
+      });
+      var tableData = document.createElement("td");
+      var favBtn = document.createElement("button");
+      favBtn.addEventListener("click", toggleWordFav.bind(null, partOfSpeech, favBtn, wordObject));
+      favBtn.className = '';
+      tableData.appendChild(favBtn);
+      if(favList.find(elem => elem['German'] == wordObject['German'])) {
+        favBtn.innerHTML = "Remove";
+        favBtn.className = 'button-blue';
+      } else {
+        favBtn.innerHTML = "Add";
+        favBtn.className = 'button-green';
+      }
+      tableRow.appendChild(tableData);
+      table.appendChild(tableRow);
+    });
+
+    wordArea.appendChild(table);
+    wordArea.className = "";
+  }
+
+  function toggleWordFav(partOfSpeech, favBtn, word) {
+    //alert("you want to toggle " + word['German']);
+    var favList = [];
+    try {
+      favList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav"));
+    } catch (e) {
+      console.log('havent seen that one before');
+    }
+
+    if (favBtn.innerHTML == "Add") {
+      favBtn.innerHTML = "Remove";
+      favBtn.className = 'button-blue';
+      favList.push(word);
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav", JSON.stringify(favList));
+    } else {
+      favBtn.innerHTML = "Add";
+      favBtn.className = 'button-green';
+      favList = favList.filter(elem => elem['German'] != word['German']);
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav", JSON.stringify(favList));
+    }
+  }
+
+
+  /*********************************************************************
+   *                                                                   *
+   *      This section if for learning all the words in the app
+   *                                                                   *  
+   ********************************************************************/
+
+  function populateLearn() {
+    deleteElementContents('button-row');
+
+    var partsOfSpeech = getPartsOfSpeechFromLocalStorage();
+    
+    var buttonRow = document.getElementById('button-row');
+    partsOfSpeech.forEach(function(partOfSpeech) {
+      var button = document.createElement("button");
+      button.setAttribute("onclick", `showNewCard("${partOfSpeech}")`);
+      button.className = 'button-big';
+      button.innerHTML = `Show me a ${partOfSpeech}`;
+      buttonRow.appendChild(button);
+    });
+
+    var groupType = localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype') || 'all';
+    var show = 'dontshow';
+    var hide = 'replaceall';
+    if (groupType != 'all') {
+      show = 'replaceall';
+      hide = 'dontshow';
+    }
+    var hideButton = document.getElementById(hide);
+    if (!hideButton.classList.contains('hide')) {
+      hideButton.classList.add("hide");
+    }
+    document.getElementById(show).classList.remove('hide');
+  }
+
+  function showNewCard(partOfSpeech) {
+    deleteElementContents('card-area');
+    var currentList = [];
+    try {
+      if (['groupsmall','groupbig'].includes(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype'))) {
+        currentList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + 'group'));
+      } else {
+        currentList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech));
+      }
+    } catch (e) {
+      console.log('havent seen that one before');
+    }
+
+    var cardArea = document.getElementById("card-area");
+
+    var wordNumber = parseInt(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'wordgroupNumber'));
+    if (isNaN(wordNumber) || wordNumber > currentList.length-1) {
+      wordNumber = 0;
+    }
+    var randomWord = currentList[wordNumber]
+
+    if (!randomWord) {
+      randomWord = {'German': `Could not find a ${partOfSpeech}`, 'English': `Could not find a ${partOfSpeech}`};
+    }
+
+    document.getElementById('current-part-of-speech').innerHTML = partOfSpeech;
+    document.getElementById('current-word').innerHTML = randomWord['German'];
+
+    var frontText = Math.random() > 0.5 ? randomWord["German"] : randomWord["English"];
+
+    var frontcard = document.createElement("div");
+    frontcard.setAttribute("id", 'front-card');
+    frontcard.setAttribute("onclick", "flipCard()");
+    frontcard.className = 'front-card';
+    frontcard.innerHTML = frontText;
+    cardArea.appendChild(frontcard);
+
+    var backcard = document.createElement("div");
+    backcard.setAttribute("id", 'back-card');
+    backcard.className = 'back-card display-flex column hide';
+    Object.keys(randomWord).forEach((key) => {
+      var line = document.createElement("div");
+      line.innerHTML = `${key}: ${randomWord[key]}`;
+      
+      if (key == 'Part of Speech' || randomWord[key] == '') {
+        return;
+      }
+      backcard.appendChild(line);
+    });
+    cardArea.appendChild(backcard);
+    cardArea.classList.remove('hide');
+
+    localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + 'wordgroupNumber', wordNumber+1);
+    document.getElementById('button-row').classList.add('hide');
+  }
+
+  function flipCard() {
+    document.getElementById('front-card').className = 'hide';
+    document.getElementById('back-card').classList.remove('hide');
+    document.getElementById('feedback').classList.remove('hide');
+  }
+
+  function giveFeedback(feedback) {
+    var partOfSpeech = document.getElementById('current-part-of-speech').innerHTML;
+    var word = document.getElementById('current-word').innerHTML;
+    var currentGrouping = localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype') || 'all';
+    var storageString = currentGrouping == 'all' ? partOfSpeech : partOfSpeech + 'group';
+    var currentList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + storageString));
+    var wordObject = currentList.filter((wordObj) => wordObj['German'] == word);
+    
+    if (wordObject.length != 1) {
+      document.getElementById('button-row').classList.remove('hide');
+      document.getElementById('card-area').classList.add('hide');
+      document.getElementById('feedback').classList.add('hide');
+    }
+    if (feedback == 'dont') {
+      var newList = currentList.filter((wordObj) => wordObj['German'] != word);
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + storageString, JSON.stringify(newList));
+    } else if (feedback == 'right') {
+      wordObject[0]['Streak'] ? wordObject[0]['Streak'] += 1 : wordObject[0]['Streak'] = 1;
+      if (wordObject[0]['Streak'] >= 6 && currentGrouping != 'all') {
+        var nowTime = (new Date()).getTime();
+        var seenWords = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'seengroupWords'));
+        seenWords[wordObject[0]['German']] = nowTime;
+
+        currentList = currentList.filter((wordObj) => wordObj['German'] != word);
+        var wholeList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech));
+        var randomWord = null;
+        var count = 0;
+        while (!randomWord && count < 10000) {
+          count++;
+          var number = Math.floor(Math.random() * wholeList.length);
+          try {
+            if (!wholeList.length) {
+              continue;
+            }
+            
+            if (!seenWords[wholeList[number]['German']] || seenWords[wholeList[number]['German']] < (nowTime - 604800)) {
+              randomWord = wholeList[number];
+              randomWord['Streak'] = 0;
+            }
+          } catch (e) {
+            console.log(e);
+          }
+        }
+        currentList.push(randomWord);
+        localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + 'seengroupWords', JSON.stringify(seenWords));
+      }
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + storageString, JSON.stringify(currentList));
+    } else if (feedback == 'wrong') {
+      wordObject[0]['Streak'] = 0;
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + storageString, JSON.stringify(currentList));
+    }  else if (feedback == 'newgroup') {
+      resetPartOfSpeechGroup(partOfSpeech);
+    }
+    document.getElementById('button-row').classList.remove('hide');
+    document.getElementById('card-area').classList.add('hide');
+    document.getElementById('feedback').classList.add('hide');
+  }
+
+
+  /*********************************************************************
+   *                                                                   *
+   *      This section if for learning the favorited words in the app
+   *                                                                   *  
+   ********************************************************************/
+
+  function populateFavorite() {
+    deleteElementContents('button-row-fav');
+
+    var partsOfSpeech = getPartsOfSpeechFromLocalStorage();
+    
+    var buttonRow = document.getElementById('button-row-fav');
+    partsOfSpeech.forEach(function(partOfSpeech) {
+      var button = document.createElement("button");
+      button.setAttribute("onclick", `showNewFavCard("${partOfSpeech}")`);
+      button.className = 'button-big';
+      button.innerHTML = `Show me a ${partOfSpeech}`;
+      buttonRow.appendChild(button);
+
+      var favList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav"));
+      if(!favList) {
+        localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav",JSON.stringify([]));
+      }
+    });
+  }
+
+  function showNewFavCard(partOfSpeech) {
+    deleteElementContents('card-area-fav');
+    var currentList = [];
+    try {
+      currentList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav"));
+    } catch (e) {
+      console.log('havent seen that one before');
+    }
+
+    var cardArea = document.getElementById("card-area-fav");
+
+    if(currentList.length == 0) {
+      var frontcard = document.createElement("div");
+      frontcard.setAttribute("id", 'front-card-fav');
+      frontcard.className = 'front-card-error';
+      frontcard.innerHTML = "You need favorites for " + partOfSpeech + ". Please go to the Words tab and select some favorites";
+      frontcard.setAttribute("onclick", "resetFavSection()");
+      cardArea.appendChild(frontcard);
+      cardArea.classList.remove('hide');
+      document.getElementById('button-row-fav').classList.add('hide');
+      return;
+    }
+
+    var wordNumber = Math.floor(Math.random() * currentList.length);
+    //if (isNaN(wordNumber) || wordNumber > currentList.length-1) {
+    //  wordNumber = 0;
+    //}
+    var randomWord = currentList[wordNumber]
+
+    if (!randomWord) {
+      randomWord = {'German': `Could not find a ${partOfSpeech}`, 'English': `Could not find a ${partOfSpeech}`};
+    }
+
+    document.getElementById('current-fav-part-of-speech').innerHTML = partOfSpeech;
+    document.getElementById('current-fav-word').innerHTML = randomWord['German'];
+
+    var frontText = Math.random() > 0.5 ? randomWord["German"] : randomWord["English"];
+
+    var frontcard = document.createElement("div");
+    frontcard.setAttribute("id", 'front-card-fav');
+    frontcard.setAttribute("onclick", "flipCardFav()");
+    frontcard.className = 'front-card';
+    frontcard.innerHTML = frontText;
+    cardArea.appendChild(frontcard);
+
+    var backcard = document.createElement("div");
+    backcard.setAttribute("id", 'back-card-fav');
+    backcard.className = 'back-card display-flex column hide';
+    Object.keys(randomWord).forEach((key) => {
+      var line = document.createElement("div");
+      line.innerHTML = `${key}: ${randomWord[key]}`;
+      
+      if (key == 'Part of Speech' || randomWord[key] == '') {
+        return;
+      }
+      backcard.appendChild(line);
+    });
+    cardArea.appendChild(backcard);
+    cardArea.classList.remove('hide');
+
+    document.getElementById('button-row-fav').classList.add('hide');
+  }
+
+  function flipCardFav() {
+    document.getElementById('front-card-fav').className = 'hide';
+    document.getElementById('back-card-fav').classList.remove('hide');
+    document.getElementById('feedback-fav').classList.remove('hide');
+  }
+
+  function resetFavSection() {
+    document.getElementById('button-row-fav').classList.remove('hide');
+    document.getElementById('card-area-fav').classList.add('hide');
+    document.getElementById('feedback-fav').classList.add('hide');
+  }
+
+  function giveFeedbackFav(feedback) {
+    var partOfSpeech = document.getElementById('current-fav-part-of-speech').innerHTML;
+    var word = document.getElementById('current-fav-word').innerHTML;
+    var favList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav"));
+    var wordObject = favList.filter((wordObj) => wordObj['German'] == word);
+    
+    if (wordObject.length != 1) {
+      document.getElementById('button-row-fav').classList.remove('hide');
+      document.getElementById('card-area-fav').classList.add('hide');
+      document.getElementById('feedback-fav').classList.add('hide');
+    }
+    if (feedback == 'remove') {
+      var newList = favList.filter((wordObj) => wordObj['German'] != word);
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav", JSON.stringify(newList));
+    } else if (feedback == 'right') {
+      wordObject[0]['Streak'] ? wordObject[0]['Streak'] += 1 : wordObject[0]['Streak'] = 1;
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav", JSON.stringify(favList));
+    } else if (feedback == 'wrong') {
+      wordObject[0]['Streak'] = 0;
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav", JSON.stringify(favList));
+    }
+    
+    document.getElementById('button-row-fav').classList.remove('hide');
+    document.getElementById('card-area-fav').classList.add('hide');
+    document.getElementById('feedback-fav').classList.add('hide');
+  }
+
+
+  /*********************************************************************
+   *                                                                   *
+   *      This section if for settings
+   *                                                                   *  
+   ********************************************************************/
+
+  function populateSettings() {
+    var currentGrouping = localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype') || 'all';
+    
+    var allRadio = document.getElementById('groupAll');
+    currentGrouping == 'all' ? allRadio.checked = true : allRadio.checked = false;
+
+    var smallGroupRadio = document.getElementById('groupSmall');
+    currentGrouping == 'groupsmall' ? smallGroupRadio.checked = true : smallGroupRadio.checked = false;
+
+    var bigGroupRadio = document.getElementById('groupBig');
+    currentGrouping == 'groupbig' ? bigGroupRadio.checked = true : bigGroupRadio.checked = false;
+  }
+
+  function switchLearning(evt) {
+    console.log('in switchLearning');
+    if (document.getElementById('groupAll').checked) {
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype', 'all');
+      var replaceAll = document.getElementById('replaceall');
+      if (!replaceAll.classList.contains('hide')) {
+        replaceAll.classList.add("hide");
+      }
+      document.getElementById('dontshow').classList.remove('hide');
+      return;
+    }
+    if (document.getElementById('groupSmall').checked) {
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype', 'groupsmall');
+    }
+    if (document.getElementById('groupBig').checked) {
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype', 'groupbig');
+    }
+    var dontshow = document.getElementById('dontshow');
+    if (!dontshow.classList.contains('hide')) {
+      dontshow.classList.add("hide");
+    }
+    document.getElementById('replaceall').classList.remove('hide');
+    var partsOfSpeech = getPartsOfSpeechFromLocalStorage();
+    partsOfSpeech.forEach((partOfSpeech) => {
+      resetPartOfSpeechGroup(partOfSpeech);
+    });
+  }
+
+  function resetPartOfSpeechGroup(partOfSpeech) {
+    var nowTime = (new Date()).getTime();
+    var seenWords = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'seengroupWords'));
+    var currentGrouping = localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype') || 'groupsmall';
+    var numInGroup = currentGrouping == 'groupbig' ? 20 : 10;
+    var wholeList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech));
+    var shortList = [];
+    for (var i = 0; i < numInGroup; i++) {
+      var randomWord = null;
+      var count = 0;
+      while (!randomWord && count < 10000) {
+        count++;
+        var number = Math.floor(Math.random() * wholeList.length);
+        try {
+          if (!wholeList.length) {
+            continue;
+          }
+          
+          if (!seenWords[wholeList[number]['German']] || seenWords[wholeList[number]['German']] < (nowTime - 604800)) {
+            randomWord = wholeList[number];
+            randomWord['Streak'] = 0;
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      shortList.push(randomWord);
+    }
+
+    localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + 'group', JSON.stringify(shortList));
+  }
+
+  function exportData() {
+    alert('exporting data');
+    var allData = {};
+    var partsOfSpeech = getPartsOfSpeechFromLocalStorage();
+    partsOfSpeech.forEach(function(partOfSpeech) {
+      var wholeList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech));
+      var groupList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + 'group'));
+      var favorList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + 'Fav'));
+
+      allData[APP_LOCAL_STORAGE_PREFIX + partOfSpeech] = wholeList;
+      allData[APP_LOCAL_STORAGE_PREFIX + partOfSpeech + 'group'] = groupList;
+      allData[APP_LOCAL_STORAGE_PREFIX + partOfSpeech + 'Fav'] = favorList;
+    });
+
+    var groupType = localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'grouptype');
+    var seenGroupWords = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + 'seengroupWords'));
+    allData[APP_LOCAL_STORAGE_PREFIX + 'grouptype'] = groupType;
+    allData[APP_LOCAL_STORAGE_PREFIX + 'seengroupWords'] = seenGroupWords;
+
+    download(JSON.stringify(allData), 'settings.txt', 'text/plain');
+  }
+
+  function download(content, fileName, contentType) {
+    var a = document.createElement("a");
+    var file = new Blob([content], {type: contentType});
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
+  }
+
+  function importSettings(e) {
+    var file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var contents = e.target.result;
+      try {
+        contents = JSON.parse(contents);
+      } catch(e) {
+        alert("Could not parse that file. :(");
+      }
+      var keys = Object.keys(contents);
+      keys.forEach((key) => {
+        var value = contents[key];
+        localStorage.setItem(key, JSON.stringify(value));
+      });
+
+      populateWords();
+      populateLearn();
+      populateFavorite();
+      
+      alert("Settings uploaded!");
+    };
+    reader.readAsText(file);
+  }
+
+
+  /*********************************************************************
+   *                                                                   *
+   *      This section if for adding words to the app
+   *                                                                   *  
+   ********************************************************************/
+
+  function populateAddWords() {
+    var partsOfSpeech = getPartsOfSpeechFromLocalStorage();
+
+    var addDiv = document.getElementById('add-content');
+    var buttonRow = document.createElement("div");
+    buttonRow.className = "py";
+    addDiv.appendChild(buttonRow);
+    partsOfSpeech.forEach(function(partOfSpeech) {
+      var button = document.createElement("button");
+      button.setAttribute("onclick", `showAddWord("${partOfSpeech}")`);
+      button.innerHTML = partOfSpeech;
+      button.className = "word-button add-button-selector";
+      buttonRow.appendChild(button);
+    });
+    var addArea = document.createElement("div");
+    addArea.setAttribute('id', 'addarea');
+    addArea.className = "hide";
+    addDiv.appendChild(addArea);
+  }
+
+  function showAddWord(partOfSpeech) {
+    var addWordButtons = document.getElementsByClassName('add-button-selector');
+    for (var i = 0; i < addWordButtons.length; i++) {
+      if (addWordButtons[i].innerHTML == partOfSpeech) {
+        if (!addWordButtons[i].classList.contains('active-button')) {
+          addWordButtons[i].classList.add('active-button');
+        }
+      } else {
+        addWordButtons[i].classList.remove('active-button');
+      }
+    }
+
+    deleteElementContents('addarea');
+    var currentList = [];
+    var favList = [];
+    try {
+      currentList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech));
+      favList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav"));
+    } catch (e) {
+      console.log('havent seen that one before');
+    }
+
+    var addArea = document.getElementById("addarea");
+
+    var headerVals = Object.keys(currentList[0]);
+    //var tableRow = document.createElement("tr");
+    for (var i = 0; i < headerVals.length; i++) {
+      var element = headerVals[i];
+      if (element == 'Streak') {
+        continue;
+      }
+      var formDiv = document.createElement("div");
+      formDiv.className = 'form-div';
+      
+      var label = document.createElement('span');
+      label.innerHTML = element.replace(/[^\w]/gi, '');
+      label.className = "form-label";
+      formDiv.appendChild(label);
+      
+      var input = document.createElement('input');
+      input.setAttribute('type', 'text');
+      input.setAttribute('id', element);
+      input.setAttribute('required', true);
+      formDiv.appendChild(input);
+      addArea.appendChild(formDiv);
+    }
+
+    var addBtn = document.createElement("button");
+    addBtn.addEventListener("click", addnewword.bind(null, partOfSpeech));
+    addBtn.innerHTML = "Add";
+    addBtn.className = 'button-big button-green';
+    addArea.appendChild(addBtn);
+    addArea.className = "";
+  }
+
+  function addnewword(partOfSpeech, favBtn, word) {
+    //alert("you want to toggle " + word['German']);
+    var currentList = [];
+    var favList = [];
+    try {
+      currentList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech));
+      favList = JSON.parse(localStorage.getItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav"));
+    } catch (e) {
+      console.log('havent seen that one before');
+    }
+
+    var formDivs = document.getElementsByClassName("form-div");
+    var newWordObject = {};
+    for (var i =  0; i < formDivs.length; i++) {
+      var key = formDivs[i].firstElementChild.innerHTML;
+      var value = formDivs[i].lastElementChild.value;
+      newWordObject[key] = value;
+    }
+
+    var r = confirm("Do you want to submit as is?");
+    if (r == true) {
+      currentList.push(newWordObject);
+      // sort by name
+      currentList.sort(function(a, b) {
+        var nameA = a["German"].toUpperCase();
+        var nameB = b["German"].toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      });
+      favList.push(newWordObject);
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech, JSON.stringify(currentList));
+      localStorage.setItem(APP_LOCAL_STORAGE_PREFIX + partOfSpeech + "Fav", JSON.stringify(favList));
+      deleteElementContents('addarea');
+    }
+  }
+
+  /*********************************************************************
+   *                                                                   *
+   *      This section is for helper functions
+   *                                                                   *  
+   ********************************************************************/
+
+  function openTab(evt, tabName) {
+    var i, tabcontent, homebuttons;
+
+    homebuttons = document.getElementsByClassName("homebutton");
+    //for (i = 0; i < homebuttons.length; i++) {
+    //  homebuttons[i].className = homebuttons[i].className.replace(" active", "");
+    //}
+    //evt.currentTarget.className += " active";
+
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      if (!tabcontent[i].classList.contains('hide')) {
+        tabcontent[i].classList.add("hide");
+      }
+      tabcontent[i].classList.remove("display-flex");
+    }
+    document.getElementById(tabName).classList.remove("hide");
+    document.getElementById(tabName).classList.add("display-flex");
+    document.getElementById('tab').classList.add("hide");
+  }
+
+  function goHome() {
+    var i, tabcontent, homebuttons;
+
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      if (!tabcontent[i].classList.contains('hide')) {
+        tabcontent[i].classList.add("hide");
+      }
+      tabcontent[i].classList.remove("display-flex");
+    }
+    document.getElementById('tab').classList.remove("hide");
+  }
+
+  function getPartsOfSpeechFromLocalStorage() {
+    return Object.keys(localStorage).reduce((accumulator, option) => {
+      if(option.startsWith(APP_LOCAL_STORAGE_PREFIX) && option.search('group') < 0 && option.search('Fav') < 0) {
+        var posNoPrefix = option.split('.')[1];
+        accumulator.push(posNoPrefix);
+      }
+      return accumulator;
+    },[]);
+  }
+
+  function confirmChoice(message) {
+    return confirm(`You are about to ${message}. This can not be undone. Are you sure?`);
+  }
+
+</script>
+
+</html>
